@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.univaq.ingw.meetingplanner.model.impl;
+package it.univaq.ingw.meetingplanner.model.imp;
 
 import it.univaq.ingw.meetingplanner.model.Gruppo;
-import it.univaq.ingw.meetingplanner.model.Utente;
+import it.univaq.ingw.meetingplanner.model.Servizio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -57,14 +57,6 @@ public class GruppoImp implements Gruppo {
 
     public void setDescrizione(String descrizione) {
 	this.descrizione = descrizione;
-    }
-
-    public GruppoDataLayerImp getDatalayer() {
-	return datalayer;
-    }
-
-    public void setDatalayer(GruppoDataLayerImp datalayer) {
-	this.datalayer = datalayer;
     }
     
    public List<Servizio> getServizi(){
