@@ -41,7 +41,9 @@ public class UtenteDataLayerImp extends DataLayerImp implements UtenteDataLayer 
       return utente;
    }
 
-   List<Gruppo> getGruppoByUtente(UtenteImp aThis) {
+   
+   @Override
+   public List<Gruppo> getGruppoByUtente(UtenteImp aThis) {
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
    
