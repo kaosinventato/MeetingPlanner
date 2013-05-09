@@ -1,95 +1,133 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.univaq.ingw.meetingplanner.model.imp;
 
 import it.univaq.ingw.meetingplanner.model.Gruppo;
 import it.univaq.ingw.meetingplanner.model.Utente;
+import it.univaq.ingw.meetingplanner.model.UtenteDataLayer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
+ * Implementazione della interfaccia Utente per la interazione con il database.
  *
  * @author Alessandro
+ * @author Daniele
  */
 public class UtenteImp implements Utente {
-    private int idUtente;
-    private String nome;
-    private String cognome;
-    private String username;
-    private String password;
-    private List<Gruppo> gruppo = null;
-    private UtenteDataLayerImp datalayer;
+   //<editor-fold desc="Variabili di istanza" defaultstate="collapsed">
+   
+   /** Identificativo dell'utente. */
+   private int idUtente;   
+   /** Il nome dell'utente. */
+   private String nome;   
+   /** Il cognome dell'utente. */
+   private String cognome;   
+   /** L'username dell'utente. */
+   private String username;   
+   /** I gruppi a cui è associato l'utente. */
+   private List<Gruppo> gruppi = null;   
+   
+   /** Il datalayer associato all'utente. */
+   private UtenteDataLayer datalayer;
+   
+   //</editor-fold>
+   
+   //<editor-fold desc="Costruttori" defaultstate="collapsed">
+   
+   /**
+    * Costruttore di un nuovo Utente.
+    * 
+    * @param datalayer - datalayer associato all'utente
+    */
+   UtenteImp(UtenteDataLayerImp datalayer){
+      idUtente = -1;
+      nome = "";
+      cognome = "";
+      username = "";
+      this.datalayer = datalayer;
+   }
+   
+   /**
+    * Costruttore di un utente, caricando i valori da un resultset.
+    * 
+    * @param datalayer - datalyer associato all'utente
+    * @param data - resultset dove si recuperano i valori
+    */
+   UtenteImp(UtenteDataLayerImp datalayer, ResultSet data) {
+      this.datalayer = datalayer;
+      
+      try {	 
+	 idUtente = data.getInt("idUtente");
+	 nome = data.getString("nome");
+	 cognome = data.getString("cognome");
+	 username = data.getString("username");
+      } catch (SQLException ex) {
+	 Logger.getLogger(UtenteImp.class.getName()).log(Level.SEVERE, null, ex);
+      }
+   }
     
-    UtenteImp(UtenteDataLayerImp datalayer){
-        idUtente = -1;
-        nome = "";
-        cognome = "";
-        username = "";
-        password = "";
-        this.datalayer = datalayer;
-    }
-    
-    UtenteImp(UtenteDataLayerImp datalayer, ResultSet data) throws SQLException {
-    this.datalayer = datalayer;
-    idUtente = data.getInt("idUtente");
-    nome = data.getString("nome");
-    cognome = data.getString("cognome");
-    username = data.getString("username");
-    password = data.getString("password");
-    }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Metodi GET">
+    
+    @Override
     public int getIdUtente() {
 	return idUtente;
     }
-
-    public void setIdUtente(int idUtente) {
-	this.idUtente = idUtente;
-    }
-
+    
+    @Override
     public String getNome() {
 	return nome;
     }
-
-    public void setNome(String nome) {
-	this.nome = nome;
-    }
-
+    
+    @Override
     public String getCognome() {
-	return cognome;
+       return cognome;
     }
-
-    public void setCognome(String cognome) {
-	this.cognome = cognome;
-    }
-
+    
+    @Override
     public String getUsername() {
-	return username;
+       return username;
     }
-
-    public void setUsername(String username) {
-	this.username = username;
-    }
-
-    public String getPassword() {
-	return password;
-    }
-
-    public void setPassword(String password) {
-	this.password = password;
-    }   
     
+    @Override
     public List<Gruppo> getGruppo(){
-	    if (gruppo == null){
-		gruppo =  datalayer.getGruppoByUtente(this);
-	    }
-	    return gruppo;
+       if (gruppi == null){
+	  gruppi =  datalayer.getGruppoByUtente(this);
+       }
+       return gruppi;
     }
     
-    public void setGruppo(List<Gruppo> gruppo){
-	this.gruppo = gruppo;
+    //</editor-fold>
+
+    //<editor-fold desc="Metodi SET" defaultstate="collapsed">
+    
+    @Override
+    public void setIdUtente(int idUtente) {
+	this.idUtente = idUtente;
     }
     
+    @Override
+    public void setNome(String nome) {
+       this.nome = nome;
+    }
+    
+    @Override
+    public void setCognome(String cognome) {
+       this.cognome = cognome;
+    }
+    
+    @Override
+    public void setUsername(String username) {
+       this.username = username;
+    }
+    
+    @Override
+    public void setGruppo(List<Gruppo> gruppi){
+       this.gruppi = gruppi;
+    }
+    
+    //</editor-fold>
 }
