@@ -2,6 +2,7 @@ package it.univaq.ingw.meetingplanner.model.imp;
 
 import it.univaq.ingw.meetingplanner.model.Gruppo;
 import it.univaq.ingw.meetingplanner.model.Utente;
+import it.univaq.ingw.meetingplanner.model.UtenteDataLayer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,7 +30,7 @@ public class UtenteImp implements Utente {
    private List<Gruppo> gruppi = null;   
    
    /** Il datalayer associato all'utente. */
-   private UtenteDataLayerImp datalayer;
+   private UtenteDataLayer datalayer;
    
    //</editor-fold>
    
