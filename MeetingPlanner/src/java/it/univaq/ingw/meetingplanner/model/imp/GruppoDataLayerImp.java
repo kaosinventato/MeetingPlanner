@@ -1,19 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.univaq.ingw.meetingplanner.model.imp;
 
+import it.univaq.ingw.meetingplanner.model.GruppoDataLayer;
 import it.univaq.ingw.meetingplanner.model.Servizio;
 import java.util.List;
 
 /**
- *
+ * 
  * @author Daniele
  */
-class GruppoDataLayerImp {
+class GruppoDataLayerImp implements GruppoDataLayer{
 
-   List<Servizio> getUtentiByGruppo(GruppoImp aThis) {
+   @Override
+   public List<Servizio> getUtentiByIdGruppo(int idGruppo) {
       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
    
